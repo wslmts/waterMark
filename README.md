@@ -6,7 +6,9 @@
 - import {waterMark} from '@zcc/watermark'
 - waterMark({options})
 options:以下参数都有默认值；
->   width=每个签名占据宽度,
+
+```
+    width=每个签名占据宽度,
     height=每个签名占据高度,
     rotate = 旋转角度,
     color = 文字颜色,
@@ -17,4 +19,5 @@ options:以下参数都有默认值；
     opacity = 水印透明度,
     zIndex = 层叠顺序,
     container = 水印容器
+```
 
