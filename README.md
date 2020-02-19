@@ -36,6 +36,6 @@ container默认是body,建议至少添加此项；
 ## require
 
 ```
-let m = require('@zcc/pkgdemo')
+let m = require('@zcc/watermark')
 m.waterMark({options})
 ```

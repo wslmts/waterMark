@@ -2,7 +2,7 @@
   "name": "@zcc/watermark",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/lib.js",
+  "main": "dist/watermark.min.js",
   "scripts": {
     "build": "webpack",
     "prepublish": "npm run build"

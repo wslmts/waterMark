@@ -13,18 +13,7 @@ let common = {
    
 }
 
-let clientConfig = {
-  mode: 'production',
-  target: 'web',
-  ...common,
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'lib.js',
-    library: 'waterMark',
-    libraryTarget:'umd'
-  }
-};
-let webConfig = {
+module.exports = {
   mode: 'production',
   target: 'web',
   ...common,
@@ -32,10 +21,6 @@ let webConfig = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'watermark.min.js',
     library: '',
-    libraryTarget:'window'
+    libraryTarget:'umd'
   }
 };
-module.exports = [ 
-    webConfig,
-    clientConfig 
-];
