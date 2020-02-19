@@ -4,20 +4,14 @@ let common = {
     entry: './src/index.js',
     module: {
         rules: [
-            {loader: "babel-loader"}
+          {  
+            test: /\.(js)$/,
+            loader: "babel-loader"
+          }
         ]
     }
    
 }
-// let serverConfig = {
-//   mode: 'production',
-//   target: 'node',
-//   ...common,
-//   output: {
-//     path: path.resolve(__dirname, 'dist'),
-//     filename: 'lib.node.js'
-//   }
-// };
 
 let clientConfig = {
   mode: 'production',
@@ -30,8 +24,18 @@ let clientConfig = {
     libraryTarget:'umd'
   }
 };
-
+let webConfig = {
+  mode: 'production',
+  target: 'web',
+  ...common,
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'watermark.min.js',
+    library: '',
+    libraryTarget:'window'
+  }
+};
 module.exports = [ 
-    //serverConfig,
+    webConfig,
     clientConfig 
 ];

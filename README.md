@@ -21,3 +21,15 @@ options:以下参数都有默认值；
     container = 水印容器
 ```
 
+以上参数都有默认值，不合适的根据使用情况自己调整；
+container默认是body,建议至少添加此项；
+
+## 新增浏览器直接调用
+
+```
+把dist目录下的watermark.min.js复制到自己项目js目录下，页面引用以后；
+直接调用 waterMark({options});
+参数含义同上；
+
+注意：waterMark是全局变量，不要冲突了；
+```
