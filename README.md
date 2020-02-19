@@ -33,3 +33,9 @@ container默认是body,建议至少添加此项；
 
 注意：waterMark是全局变量，不要冲突了；
 ```
+## require
+
+```
+let m = require('@zcc/pkgdemo')
+m.waterMark({options})
+```
