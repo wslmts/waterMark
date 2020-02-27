@@ -9,7 +9,8 @@ export function waterMark({
     content = "zcc",
     opacity = '0.6',
     zIndex = 999,
-    container = document.body
+    container = document.body,
+    onlyURL=false
 } = {}){
     let cvs =document.createElement('canvas');
     let ctx = cvs.getContext('2d');
@@ -20,8 +21,20 @@ export function waterMark({
     ctx.font = font
     ctx.textAlign = textAlign
     ctx.textBaseline = textBaseline
-    ctx.fillText(content, parseFloat(width/2),parseFloat(height/2))
+    ctx.translate(0,-rotate)
+    if(Array.isArray(content)){
+        let num = content.length
+        content.forEach((v,i)=>{
+            ctx.fillText(content[i], parseFloat(width/2),(i*2+1)*parseFloat(height/num/2))
+        })
+    } else {
+        ctx.fillText(content, parseFloat(width/2),parseFloat(height/2))
+    }
+    
     let url = cvs.toDataURL()
+    if(onlyURL){
+        return url;
+    }
     let div = document.createElement('div')
     div.style = `
     position:absolute;

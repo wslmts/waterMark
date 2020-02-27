@@ -11,6 +11,9 @@
 let div=document.querySelector("#a")
 window.onload = function(){
   waterMark({container:div})
+  waterMark({container:div,content:['hello','javascript','mmm'],height:250})
+  var url=waterMark({container:div,onlyURL:true})
+  console.log('url ',url)
 }
 </script>
 </body>
