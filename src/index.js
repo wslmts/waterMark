@@ -39,7 +39,6 @@ export function waterMark({
     if(!wrap){
         wrap = document.createElement('div')
         wrap.classList.add('__wm__')
-        wrap.style="position:relative"
     }
     let style = `
     position:absolute;
@@ -53,9 +52,7 @@ export function waterMark({
     background-repeat:repeat;
     background-image:url(${url});
    `;
-   let div = document.createElement('div')
-   div.style = style;
-   wrap.appendChild(div)
+    wrap.style = style;
    container.appendChild(wrap)
    if(MutationObserver){
         let args = arguments[0]
