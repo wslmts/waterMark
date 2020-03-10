@@ -35,8 +35,13 @@ export function waterMark({
     if(onlyURL){
         return url;
     }
-    let div = document.createElement('div')
-    div.style = `
+    let wrap = container.querySelector('.__wm__')
+    if(!wrap){
+        wrap = document.createElement('div')
+        wrap.classList.add('__wm__')
+        wrap.style="position:relative"
+    }
+    let style = `
     position:absolute;
     width:100%;
     height:${container.scrollHeight}px;
@@ -47,6 +52,26 @@ export function waterMark({
     z-index: ${zIndex};
     background-repeat:repeat;
     background-image:url(${url});
-   `
-   container.appendChild(div)
+   `;
+   let div = document.createElement('div')
+   div.style = style;
+   wrap.appendChild(div)
+   container.appendChild(wrap)
+   if(MutationObserver){
+        let args = arguments[0]
+        let obj = new MutationObserver(function(){
+        let wm = container.querySelector('.__wm__')
+        if (!wm||wm&&wm.getAttribute('style')!=style) {
+            // 避免一直触发
+            obj.disconnect();
+            obj = null;
+            waterMark(args);
+          }
+        })
+       obj.observe(container, {
+        attributes: true,
+        subtree: true,
+        childList: true
+      })
+   }
 }
