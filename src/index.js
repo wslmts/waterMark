@@ -5,9 +5,9 @@ export function waterMark({
     color = "#ccc",
     textAlign = 'center',
     textBaseline = 'middle',
-    font = "20px microsoft yahei",
+    font = "16px microsoft yahei",
     content = "zcc",
-    opacity = '0.6',
+    opacity = '0.3',
     zIndex = 999,
     container = document.body,
     onlyURL=false
@@ -35,10 +35,10 @@ export function waterMark({
     if(onlyURL){
         return url;
     }
-    let wrap = container.querySelector('.__wm__')
+    let wrap = container.querySelector('#__wm__')
     if(!wrap){
         wrap = document.createElement('div')
-        wrap.classList.add('__wm__')
+        wrap.id='__wm__'
     }
     let style = `
     position:absolute;
@@ -53,22 +53,27 @@ export function waterMark({
     background-image:url(${url});
    `;
     wrap.style = style;
-   container.appendChild(wrap)
-   if(MutationObserver){
+    container.appendChild(wrap)
+    if(MutationObserver){
         let args = arguments[0]
-        let obj = new MutationObserver(function(){
-        let wm = container.querySelector('.__wm__')
-        if (!wm||wm&&wm.getAttribute('style')!=style) {
-            // 避免一直触发
-            obj.disconnect();
-            obj = null;
-            waterMark(args);
-          }
+        let obj = new MutationObserver(function(list){ 
+            for(let m of list) {           
+                if (m.removedNodes.length && m.removedNodes[0].id=='__wm__'&&!document.querySelector('#__wm__')) {
+                    waterMark(args);               
+                }
+            }      
         })
-       obj.observe(container, {
-        attributes: true,
-        subtree: true,
-        childList: true
-      })
-   }
+        obj.observe(container, {        
+            childList: true,
+        })
+    
+        let canvasObj = new MutationObserver(function(v){
+            if (document.querySelector('#__wm__')){
+                document.querySelector('#__wm__').style = style
+            }
+        })
+        canvasObj.observe(container.querySelector('#__wm__') , {        
+            attributes: true
+        })
+    }
 }
