@@ -42,7 +42,6 @@ export function waterMark({
     }
     let style = `
     position:fixed;
-    width:100%;
     height:${container.scrollHeight}px;
     pointer-events:none;
     top:0;
@@ -52,7 +51,8 @@ export function waterMark({
     background-repeat:repeat;
     background-image:url(${url});
    `;
-    wrap.style = style;
+    let containerWidth = container===document.body ? 'width:100%' :''
+    wrap.style = style + containerWidth;
     container.appendChild(wrap)
     if(MutationObserver){
         let args = arguments[0]
