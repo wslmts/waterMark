@@ -41,7 +41,7 @@ export function waterMark({
         wrap.id='__wm__'
     }
     let style = `
-    position:absolute;
+    position:fixed;
     width:100%;
     height:${container.scrollHeight}px;
     pointer-events:none;
